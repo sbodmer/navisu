@@ -7,6 +7,8 @@ import bzh.terrevirtuelle.navisu.core.view.geoview.layer.worldwind.basic.EarthAt
 import bzh.terrevirtuelle.navisu.core.view.geoview.layer.worldwind.basic.FogLayer;
 import gov.nasa.worldwind.layers.*;
 import gov.nasa.worldwind.layers.Earth.*;
+import java.io.InputStream;
+import org.osmbuildings.OSMBuildingsLayer;
 
 /**
  *
@@ -63,6 +65,7 @@ public enum WorldWindLayers {
 
         return GeoLayer.factory.newWorldWindGeoLayer(layer);
     }
+
     public GeoLayer<Layer> newInstance(String name) {
 
         Layer layer = null;
@@ -73,8 +76,10 @@ public enum WorldWindLayers {
             layer.setEnabled(enabled);
             layer.setMinActiveAltitude(minActiveAltitude);
         } catch (IllegalAccessException | InstantiationException e) {
+            //---
         }
 
         return GeoLayer.factory.newWorldWindGeoLayer(layer);
     }
+
 }

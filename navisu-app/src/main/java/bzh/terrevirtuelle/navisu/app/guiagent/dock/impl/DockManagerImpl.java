@@ -10,6 +10,7 @@ import bzh.terrevirtuelle.navisu.app.guiagent.GuiAgentServices;
 import bzh.terrevirtuelle.navisu.app.guiagent.dock.DockManager;
 import bzh.terrevirtuelle.navisu.app.guiagent.dock.DockManagerServices;
 import bzh.terrevirtuelle.navisu.app.guiagent.tools.AnimationFactory;
+import bzh.terrevirtuelle.navisu.core.view.geoview.worldwind.impl.GeoWorldWindViewImpl;
 
 import org.capcaval.c3.component.ComponentState;
 
@@ -23,6 +24,7 @@ import bzh.terrevirtuelle.navisu.widgets.radialmenu.menu.RadialMenuBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +39,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 
 import org.capcaval.c3.component.annotation.UsedService;
+import org.osmbuildings.OSMBuildingsLayer;
 
 /*
  * NaVisu
@@ -210,10 +213,12 @@ public class DockManagerImpl<TrackTool>
     private void createOsmBWidget() {
         osmBRadialMenu = RadialMenuBuilder.create()
                 .centralImage("chantier.png")
-                .createNode(0, "vide.png", 0, "vide.png", 0, "vide.png", (e) -> open())
-                .createNode(1, "vide.png", 0, "vide.png", 0, "vide.png", (e) -> open())
-                .createNode(2, "vide.png", 0, "vide.png", 0, "vide.png", (e) -> open())
+                .createNode(0, "vide.png", 0, "vide.png", 0, "vide.png", (e) -> clearOSMBuildings())
                 .build();
+        
+        // .createNode(1, "vide.png", 0, "vide.png", 0, "vide.png", (e) -> open())
+        // .createNode(2, "vide.png", 0, "vide.png", 0, "vide.png", (e) -> open())
+                
         osmBRadialMenu.setLayoutX((width / 2) - 10);
         osmBRadialMenu.setLayoutY(height / 2);
         root.getChildren().add(osmBRadialMenu);
@@ -485,6 +490,12 @@ public class DockManagerImpl<TrackTool>
         clear();
     }
 
+    private void clearOSMBuildings() {
+        OSMBuildingsLayer layer = (OSMBuildingsLayer) GeoWorldWindViewImpl.getWW().getModel().getLayers().getLayersByClass(OSMBuildingsLayer.class).get(0);
+        layer.clearTiles();
+        clear();
+    }
+    
     private void clear() {
         radialMenus.stream().forEach((r) -> {
             r.setVisible(false);

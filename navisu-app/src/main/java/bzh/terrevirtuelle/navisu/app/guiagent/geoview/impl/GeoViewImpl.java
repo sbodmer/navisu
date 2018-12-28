@@ -197,7 +197,6 @@ public class GeoViewImpl
 
     @SuppressWarnings("unchecked")
     protected void initDefaultLayers(final LayerManager<Layer> layerManager) {
-     
         layerManager.createGroup("On-earth layers",
                 WorldWindLayers.Stars.newInstance(),
                 WorldWindLayers.SkyGradient.newInstance(),
@@ -214,7 +213,7 @@ public class GeoViewImpl
                 WorldWindLayers.LatLonGraticule.newInstance()
                 
         );
-
+        
         layerManager.createGroup("On-screen layers",
                 //  WorldWindLayers.WorldMap.newInstance(),
                 WorldWindLayers.ScaleBar.newInstance(),
