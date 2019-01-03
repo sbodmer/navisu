@@ -11,7 +11,7 @@ subprojects {
 
 
 task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
-    gradleVersion = '1.7'
+    gradleVersion = '2.6'
 }
 
 // custom tasks for creating source/javadoc jars
