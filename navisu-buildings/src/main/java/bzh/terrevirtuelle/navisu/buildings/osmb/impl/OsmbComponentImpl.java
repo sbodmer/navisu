@@ -1,7 +1,5 @@
 package bzh.terrevirtuelle.navisu.buildings.osmb.impl;
 
-;
-
 import gov.nasa.worldwind.render.Renderable;
 import java.util.List;
 import bzh.terrevirtuelle.navisu.app.drivers.instrumentdriver.InstrumentDriver;
@@ -15,6 +13,7 @@ import gov.nasa.worldwind.WorldWindow;
 import javafx.scene.input.KeyEvent;
 import org.capcaval.c3.component.ComponentState;
 import org.capcaval.c3.component.annotation.UsedService;
+import org.osmbuildings.OSMBuildingsLayer;
 
 /**
  * NaVisu
@@ -37,8 +36,8 @@ public class OsmbComponentImpl
     LayersManagerServices layersManagerServices;
 
     @Override
-    public List<Renderable> retrieveObjectsIn(double latMin, double lonMin, double latMax, double lonMax) {
-        return controller.retrieveObjectsIn(latMin, lonMin, latMax, lonMax);
+    public List<Renderable> retrieveObjectsIn(double lat, double lon) {
+        return controller.retrieveObjectsIn(lat, lon);
     }
 
     @Override
@@ -74,6 +73,17 @@ public class OsmbComponentImpl
     @Override
     public void componentInitiated() {
         wwd = GeoWorldWindViewImpl.getWW();
+
+        OSMBuildingsLayer layer = (OSMBuildingsLayer) layersManagerServices.getLayer("On-earth layers", "OSMBuildings");
+        //--- Fine tune the layer
+        layer.setMaxTiles(9);
+        layer.setRows(3);
+        layer.setCols(3);
+        layer.setDrawProcessingBox(true);
+        layer.setMinActiveAltitude(0);
+        layer.setMaxActiveAltitude(8000);
+        layer.setDefaultBuildingHeight(10);
+        layer.setPickEnabled(false);
     }
 
     @Override

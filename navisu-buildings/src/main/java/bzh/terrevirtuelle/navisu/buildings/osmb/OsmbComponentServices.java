@@ -14,6 +14,9 @@ public interface OsmbComponentServices
 
     InstrumentDriver getDriver();
 
-    List<Renderable> retrieveObjectsIn(double latMin, double lonMin, double latMax, double lonMax);
+    /**
+     * Only tile are fetchable (not a zone)
+     */
+    List<Renderable> retrieveObjectsIn(double lat, double lon);
 
 }

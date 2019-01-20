@@ -28,6 +28,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import org.osmbuildings.OSMBuildingsLayer;
 
 /**
  * NaVisu project
@@ -106,9 +107,11 @@ public class OsmbComponentController
         });
     }
 
-    public List<Renderable> retrieveObjectsIn(double latMin, double lonMin, double latMax, double lonMax) {
+    public List<Renderable> retrieveObjectsIn(double lat, double lon) {
         List<Renderable> result = null;
-        //osmbLayer ?
+        
+        OSMBuildingsLayer layer = (OSMBuildingsLayer) layersManagerServices.getLayer(GROUP, LAYER);
+        
         return result;
     }
 }
