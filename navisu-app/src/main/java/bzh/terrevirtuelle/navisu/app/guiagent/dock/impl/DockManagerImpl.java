@@ -85,7 +85,7 @@ public class DockManagerImpl<TrackTool>
     protected RadialMenu systemRadialMenu;
     protected RadialMenu tracksRadialMenu;
     protected RadialMenu shomRadialMenu;
-    protected RadialMenu osmBRadialMenu;
+    protected RadialMenu buildingsRadialMenu;
 
     protected ImageView centerImg;
     protected int width;
@@ -149,9 +149,9 @@ public class DockManagerImpl<TrackTool>
         (e) -> {
             shomRadialMenu.setVisible(!shomRadialMenu.isVisible());
         }),
-        DockItemFactory.newImageItem("osmb", ICON_PATH + "dock_icons/osmB.png",
+        DockItemFactory.newImageItem("osmb", ICON_PATH + "dock_icons/buildings.png",
         (e) -> {
-            osmBRadialMenu.setVisible(!osmBRadialMenu.isVisible());
+            buildingsRadialMenu.setVisible(!buildingsRadialMenu.isVisible());
         })
     };
     final Dock dock = new Dock(ICONS);
@@ -180,7 +180,7 @@ public class DockManagerImpl<TrackTool>
         createTidesRadialWidget();
         createToolsRadialWidget();
         createNavigationRadialWidget();
-        createOsmBWidget();
+        createBuildingsWidget();
         createSystemRadialWidget();
         createStlWidget();
         createShomWidget();
@@ -208,21 +208,19 @@ public class DockManagerImpl<TrackTool>
             }
         });
     }
-    //--------------OSMB------------------
+    //--------------Buildings------------------
 
-    private void createOsmBWidget() {
-        osmBRadialMenu = RadialMenuBuilder.create()
-                .centralImage("chantier.png")
-                .createNode(0, "vide.png", 0, "vide.png", 0, "vide.png", (e) -> clearOSMBuildings())
+    private void createBuildingsWidget() {
+        buildingsRadialMenu = RadialMenuBuilder.create()
+                .centralImage("buildingsradialmenu150.png")
+                .createNode(0, "osm.png", 0, "vide.png", 0, "vide.png", (e) -> open())
+                .createNode(2, "osmb.png", 0, "web.png", 0, "config.png", (e) -> open("OSM_BUILDINGS"))
+                .createNode(1, "brestPays3D.png", 0, "vide.png", 0, "vide.png", (e) -> open())
                 .build();
-        
-        // .createNode(1, "vide.png", 0, "vide.png", 0, "vide.png", (e) -> open())
-        // .createNode(2, "vide.png", 0, "vide.png", 0, "vide.png", (e) -> open())
-                
-        osmBRadialMenu.setLayoutX((width / 2) - 10);
-        osmBRadialMenu.setLayoutY(height / 2);
-        root.getChildren().add(osmBRadialMenu);
-        radialMenus.add(osmBRadialMenu);
+        buildingsRadialMenu.setLayoutX((width / 2) - 10);
+        buildingsRadialMenu.setLayoutY(height / 2);
+        root.getChildren().add(buildingsRadialMenu);
+        radialMenus.add(buildingsRadialMenu);
     }
 //--------------STL------------------
 
