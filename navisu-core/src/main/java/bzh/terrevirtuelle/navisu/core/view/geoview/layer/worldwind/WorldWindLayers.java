@@ -20,8 +20,6 @@ import gov.nasa.worldwind.layers.StarsLayer;
 import gov.nasa.worldwind.layers.WorldMapLayer;
 import org.osmbuildings.OSMBuildingsLayer;
 
-
-
 /**
  *
  * @author Thibault Pensec <thibault.pensec at gmail.com>
